@@ -288,7 +288,10 @@ const realToday = new Date(); realToday.setHours(0,0,0,0);
 function sundayOf(d) {
   const x = new Date(d); x.setHours(0,0,0,0); x.setDate(x.getDate() - x.getDay()); return x;
 }
-function wkey(sun) { return sun.toISOString().slice(0,10); }
+function pad2(n) { return String(n).padStart(2,'0'); }
+function wkey(sun) {
+  return sun.getFullYear() + '-' + pad2(sun.getMonth()+1) + '-' + pad2(sun.getDate());
+}
 function weekDays(key) {
   const sun = new Date(key + 'T00:00:00');
   return Array.from({length:7}, (_,i) => { const d = new Date(sun); d.setDate(sun.getDate()+i); return d; });
